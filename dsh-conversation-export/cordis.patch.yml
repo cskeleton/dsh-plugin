@@ -1,0 +1,22 @@
+# Bundle patch for dsh-conversation-export: one plugin row whose Host half
+# registers the export routes and whose Client half adds the
+# "Export conversation…" Session menu row and dialog.
+- insert:
+    - id: conversation-export
+      name: 'dsh-conversation-export'
+      config:
+        # Parallel model calls while writing summaries.
+        summaryConcurrency: 4
+        # Timeout for one summary call, in milliseconds.
+        summaryTimeoutMs: 120000
+        # Character cap for tool arguments/results in the "detailed" tool view.
+        maxDetailChars: 4000
+        # Default folder for "Save to local folder" (~ allowed); empty = ~/Downloads.
+        saveDirectory: ''
+        # Image export: device pixel ratio and split height in CSS px
+        # (pages stay below 16384 device px for iOS).
+        imageScale: 2
+        imageMaxHeight: 7500
+        # Optional explicit Chromium / Python executables for image export.
+        chromiumPath: ''
+        pythonPath: ''

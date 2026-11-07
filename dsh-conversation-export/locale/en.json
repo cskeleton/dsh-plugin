@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Conversation Export",
+    "description": "Export a Session's conversation as Markdown, HTML, or PNG images at a width you choose. Pick user and assistant messages separately; show tool calls and thinking in detail, as one-sentence summaries, or not at all; open the saved file or its folder afterwards."
+  }
+}
