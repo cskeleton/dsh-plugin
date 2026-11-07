@@ -6,7 +6,7 @@
 
 Bidirectional Session messaging and utilities for DeepSeek Harness Desktop and Web: create links, exchange durable messages, manage wake budgets, spawn ordinary Sessions with an initial model. It uses official DSH `0.2.0-rc.2` public APIs without changing the Host.
 
-**Preview release: [0.6.1-beta](https://github.com/cskeleton/dsh-gc-duolink/releases/tag/v0.6.1-beta).** DuoLink uses independent configuration, storage and protocol identities. It does not load or migrate old `dsh-session-link` settings, mail, link groups or ledgers. Disable or uninstall the old plugin and recreate links and wake grants in DuoLink. Keep old storage files if you need them; do not rename or copy them into the new domain. See [namespace isolation](docs/plans/duolink-isolation.md) and [verification](VERIFICATION.md).
+**Preview release: [0.6.1-beta](https://github.com/cskeleton/dsh-plugin/releases/tag/v0.6.1-beta).** DuoLink uses independent configuration, storage and protocol identities. It does not load or migrate old `dsh-session-link` settings, mail, link groups or ledgers. Disable or uninstall the old plugin and recreate links and wake grants in DuoLink. Keep old storage files if you need them; do not rename or copy them into the new domain. See [namespace isolation](docs/plans/duolink-isolation.md) and [verification](VERIFICATION.md).
 
 ## Visual guide
 
@@ -103,7 +103,7 @@ Old top-level `provider`, `model`, `reasoning_effort`, `model_scope` and `on_mod
 
 ## Installation
 
-Download [dsh-gc-duolink-0.6.1-beta.tgz](https://github.com/cskeleton/dsh-gc-duolink/releases/download/v0.6.1-beta/dsh-gc-duolink-0.6.1-beta.tgz) from the prerelease and select it in the DSH plugin installer. Checksums and a delivery manifest accompany the archive. Earlier local 0.6.1 archives are test snapshots. The instructions below cover source development installs.
+Download [dsh-gc-duolink-0.6.1-beta.tgz](https://github.com/cskeleton/dsh-plugin/releases/download/v0.6.1-beta/dsh-gc-duolink-0.6.1-beta.tgz) from the prerelease and select it in the DSH plugin installer. Checksums and a delivery manifest accompany the archive. Earlier local 0.6.1 archives are test snapshots. The instructions below cover source development installs.
 
 Build the directory first; development installs use `link:` without archives. Preset-registry and session-persistence are optional peers: ordinary tools can mount without them; selected spawn explicitly refuses missing public bootstrap services. Runtime peers resolve from the target profile. Disable peer auto-installation to avoid a second Host dependency tree.
 
@@ -139,12 +139,12 @@ Uninstall Web with `dsh plugin --profile web remove dsh-gc-duolink`; for Desktop
 
 ## Local directory and GitHub
 
-The real checkout is `/Users/gc/Dev/MyProject/dsh-plugin/dsh-gc-duolink`. Its `.git`, `master`, commits and uncommitted changes are retained. There is no compatibility symlink at the old directory name. Existing old-profile dependency specs are not rewritten by source changes.
+DuoLink lives in the `dsh-gc-duolink/` subdirectory of the plugin collection. The existing local plugin path is unchanged; Git is managed by the parent repository, not a nested `.git`. Its original commits, historical tags/releases and local uncommitted work are preserved. Existing profile dependencies are not rewritten by this repository migration.
 
-The existing GitHub repository has been renamed to [cskeleton/dsh-gc-duolink](https://github.com/cskeleton/dsh-gc-duolink), retaining its history, issues, tags and releases. Local `origin` now points to:
+The existing GitHub repository continues as [cskeleton/dsh-plugin](https://github.com/cskeleton/dsh-plugin), retaining its history, issues, tags and releases. The collection's `origin` points to:
 
 ```text
-https://github.com/cskeleton/dsh-gc-duolink.git
+https://github.com/cskeleton/dsh-plugin.git
 ```
 
 The former repository URL redirects to the new address; do not reuse the former name. English is the default `README.md`, with Chinese in `README.zh.md` and a language link on the first line. See [GitHub's documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository).

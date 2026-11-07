@@ -1,0 +1,14 @@
+# Shared local-only files; plugin-specific build rules stay in each plugin.
+node_modules/
+.pnpm-store/
+.zvec-grep/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local benchmark checkouts, indexes and generated test data are kept outside Git.
+/dsh-zvec-grep/benchmarks/

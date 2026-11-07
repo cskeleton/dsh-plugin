@@ -6,7 +6,7 @@
 
 DeepSeek Harness Desktop / Web 的会话互联与消息插件：建立互联、持久收发消息、管理唤醒预算、新建带初始模型的普通会话。使用官方 `0.2.0-rc.2` 公开接口，不修改宿主源码。
 
-**预发布版本：[0.6.1-beta](https://github.com/cskeleton/dsh-gc-duolink/releases/tag/v0.6.1-beta)。** DuoLink 使用独立的配置、存储与协议标识，不读取或迁移旧 `dsh-session-link` 的配置、互联组、邮箱和账本。请先停用或卸载旧插件，再在 DuoLink 中重新建立互联与唤醒授权；旧存储文件可保留，请勿改名或复制到新存储域。详见 [命名空间隔离](docs/plans/duolink-isolation.md) 和 [验证记录](VERIFICATION.md)。
+**预发布版本：[0.6.1-beta](https://github.com/cskeleton/dsh-plugin/releases/tag/v0.6.1-beta)。** DuoLink 使用独立的配置、存储与协议标识，不读取或迁移旧 `dsh-session-link` 的配置、互联组、邮箱和账本。请先停用或卸载旧插件，再在 DuoLink 中重新建立互联与唤醒授权；旧存储文件可保留，请勿改名或复制到新存储域。详见 [命名空间隔离](docs/plans/duolink-isolation.md) 和 [验证记录](VERIFICATION.md)。
 
 ## 图文介绍
 
@@ -103,7 +103,7 @@ spawn 的第一段工具文本保持旧格式；第二段携带 version 1 的 `g
 
 ## 安装
 
-从预发布页面下载 [dsh-gc-duolink-0.6.1-beta.tgz](https://github.com/cskeleton/dsh-gc-duolink/releases/download/v0.6.1-beta/dsh-gc-duolink-0.6.1-beta.tgz)，在 DSH 插件安装器中选择该文件；同页提供校验和与交付清单。此前本地 0.6.1 安装包是测试快照。下方步骤用于源码开发安装。
+从预发布页面下载 [dsh-gc-duolink-0.6.1-beta.tgz](https://github.com/cskeleton/dsh-plugin/releases/download/v0.6.1-beta/dsh-gc-duolink-0.6.1-beta.tgz)，在 DSH 插件安装器中选择该文件；同页提供校验和与交付清单。此前本地 0.6.1 安装包是测试快照。下方步骤用于源码开发安装。
 
 先构建目录，开发安装使用 `link:`，不生成安装包。`dsh-agent-preset-registry` 和 `dsh-session-persistence` 是 optional peers，缺失时普通工具仍可挂载，带 `initial_model` 的调用明确拒绝。运行时 peers 从目标 DSH profile 解析；禁用自动安装 peers，避免拉入另一套宿主。
 
@@ -139,12 +139,12 @@ DESKTOP_DSH='/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/b
 
 ## 本地目录与 GitHub
 
-真实目录为 `/Users/gc/Dev/MyProject/dsh-plugin/dsh-gc-duolink`，原 `.git`、`master`、提交和未提交修改均保留。旧目录名的兼容软链接已移除；源码调整不会自动重写旧 profile 中的依赖路径。
+DuoLink 位于插件集合的 `dsh-gc-duolink/` 子目录。既有本地插件路径不变，Git 由父目录统一管理，子目录不再保留嵌套 `.git`。原始提交、历史 tag / release 及本地未提交工作均保留。此次仓库整合不会改写已有 profile 依赖。
 
-GitHub 已将原仓库重命名为 [cskeleton/dsh-gc-duolink](https://github.com/cskeleton/dsh-gc-duolink)，沿用原有历史、issues、tags 和 releases；本地 `origin` 已同步为：
+GitHub 原仓库延续为 [cskeleton/dsh-plugin](https://github.com/cskeleton/dsh-plugin)，保留历史、issues、tags 和 releases；集合仓库的 `origin` 指向：
 
 ```text
-https://github.com/cskeleton/dsh-gc-duolink.git
+https://github.com/cskeleton/dsh-plugin.git
 ```
 
 原仓库地址会重定向到新地址；不要重新占用旧仓库名。默认英文文档为 `README.md`，中文为 `README.zh.md`，首行可切换语言。详见 [GitHub 官方说明](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)。

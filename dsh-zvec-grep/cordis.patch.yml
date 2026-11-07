@@ -1,0 +1,26 @@
+# Bundle patch: mounts the native MCP client bridge and the companion
+# query-language guidance/guard plugin. Disabling this bundle in the GUI
+# cleanly unloads both the stdio bridge and the prompt/guard rules.
+- insert:
+    - id: mcp-zvec-grep
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: zvec_grep
+        transport: stdio
+        # Absolute paths avoid the different PATH inherited by Desktop apps.
+        command: /opt/homebrew/bin/node
+        args:
+          # Match the existing, tested Codex/Claude zvec launch configuration.
+          - --liftoff-only
+          - /opt/homebrew/bin/zg
+          - server
+          - --stdio
+        toolCallTimeoutMs: 600000
+        failOnStartupError: true
+    - id: zvec-grep-guidance
+      name: 'dsh-zvec-grep'
+      config:
+        requireEnglishQuery: true
+        # Automatically index individual project subfolders under these roots on first search.
+        autoIndexRoots:
+          - ~/Dev
