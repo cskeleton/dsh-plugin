@@ -49,13 +49,15 @@ In the export, each user message and each assistant reply is a separate section 
 
 The page is rendered in headless Chromium at 2x, the same as the skill's `render.mjs`. Font size Auto is 24 px at 640 px wide, the skill's default, and eases to 16 px at 1200 px and wider. A page taller than 7500 CSS px (15000 device px) is split at a block boundary and gets a `1 / N` footer, so each image stays under the iOS 16384 px limit. Files are named `title-time-01.png`, `-02.png`, and so on.
 
+Images are always saved by the Host as separate PNG files. Even with **Browser download** selected, image export asks for one local folder and lets the Host write every image there: no ZIP archive and no browser automatic-download permission. The Host's native picker can be cancelled by closing the export dialog.
+
 When a Python with Pillow and numpy is available, each PNG is compressed. The bundled DSH runtime Python is tried first. Paper and Ink use the skill's `compress_png.py`. Sepia and Night use `assets/quantize_png.py`, a 256-colour palette, because the skill's compressor turns rows without strong colour into pure grey and would remove those themes' background tint.
 
 Chromium comes from `playwright-core`. It uses its own revision when that revision is in the Playwright cache, otherwise the newest cached Playwright Chromium, otherwise a system Chrome, Chromium, Edge, or Brave. Set `chromiumPath` to override. When none is found, the Image option is disabled and the dialog says why.
 
 ### After export
 
-With **Local folder**, the Host writes the files into the chosen folder and never overwrites. A clash becomes `name (2).md`. The dialog then shows the path with **Open file**, **Show in Finder** (Explorer on Windows), and **Copy path**. Saving and opening are offered only to a browser on the Host machine (loopback URL, no proxy headers). A remote or tunnelled browser always gets a browser download. The open route accepts only files this DSH process exported.
+With **Local folder**, the Host writes the files into the chosen folder and never overwrites. A clash becomes `name (2).md`. The dialog then shows the path with **Open file**, **Show in Finder** (Explorer on Windows), and **Copy path**. This plugin targets the local DSH Desktop app, and all saving and opening happens on the Host machine. The open route accepts only files this DSH process exported.
 
 ### Summaries and models
 

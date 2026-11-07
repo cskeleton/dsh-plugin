@@ -105,14 +105,22 @@ test('outline lists human rounds, both message roles, and capabilities', async (
   assert.equal(noModel.summary.defaultModel, null)
 })
 
-test('a tunnelled or remote browser cannot save to the Host', async () => {
-  const { call } = mount()
-  const remote = await (await call(OUTLINE_PATH, { sessionId: 'session-1' }, { host: 'abc.example.com' })).json()
-  assert.equal(remote.save.available, false)
-  const forwarded = await (await call(OUTLINE_PATH, { sessionId: 'session-1' }, { headers: { 'cf-connecting-ip': '1.2.3.4' } })).json()
-  assert.equal(forwarded.save.available, false)
-  const refused = await call(RENDER_PATH, { sessionId: 'session-1', format: 'markdown', delivery: 'save', directory: os.tmpdir() }, { host: 'abc.example.com' })
-  assert.equal(refused.status, 403)
+test('the local-only plugin keeps Host save available across Desktop transport details', async () => {
+  const dir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'cx-local-test-'))
+  try {
+    const { call } = mount()
+    const desktop = await (await call(OUTLINE_PATH, { sessionId: 'session-1' }, { host: 'abc.example.com' })).json()
+    assert.equal(desktop.save.available, true)
+    const forwarded = await (await call(OUTLINE_PATH, { sessionId: 'session-1' }, { headers: { 'cf-connecting-ip': '1.2.3.4' } })).json()
+    assert.equal(forwarded.save.available, true)
+    const saved = await call(RENDER_PATH, { sessionId: 'session-1', format: 'markdown', delivery: 'save', directory: dir }, { host: 'abc.example.com' })
+    assert.equal(saved.status, 200)
+    const value = await saved.json()
+    assert.equal(value.delivery, 'save')
+    assert.ok(fs.existsSync(value.files[0].path))
+  } finally {
+    await fs.promises.rm(dir, { recursive: true, force: true })
+  }
 })
 
 test('outline rejects bad ids and missing sessions', async () => {
